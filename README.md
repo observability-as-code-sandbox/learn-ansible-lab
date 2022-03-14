@@ -3,7 +3,8 @@
 Machine Agent Linux Play
 =========
 
-Installs AppDynamics machine agent on a target machine. As a result of a successful run machine agent is installed as a service and reporting to a controller.
+Installs AppDynamics machine agent on a Linux target machine. 
+As a result of a successful execution, machine agent run as a service on a machine and reporting to a controller.
 
 Requirements
 ------------
