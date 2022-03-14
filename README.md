@@ -9,7 +9,7 @@ As a result of a successful execution, machine agent runs as a service on a mach
 ### Requirements
 ------------
 
-- Create a Target node (Linux, Centos or RedHat) to be used to install machine agent on
+- Create a Target node (Linux - Centos recommended) to be used to install machine agent on
 - Obtain controller connection details (host, access key, account name)
 - Have Ansible installed on a Control node
 - Ability to SSH into Target nodes from Control node
