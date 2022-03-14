@@ -51,3 +51,6 @@ Running Playbook Steps
 
 4. Check if machine agent is reporting to the controller
 
+![image](https://user-images.githubusercontent.com/82029748/158177026-86b4bb1f-6f69-41ee-bf04-85c4faeff169.png)
+
+
