@@ -1,0 +1,9 @@
+---
+# Controller parameters can be included into each playbook for test purposes
+# Your AppDynamics controller host, port account and access key
+controller_host_name: "<account-here>.saas.appdynamics.com"
+controller_port: "443"
+controller_account_name: "<account-here>" # Please add this to your Vault
+controller_account_access_key: "<key-here>" # Please add this to your Vault
+enable_ssl: "TRUE"
+

@@ -1,0 +1,21 @@
+---
+
+- hosts: all
+  tasks:
+  - name: Include variables for the controller settings
+    include_vars: vars/.local.controller.yaml
+
+  - include_role:
+      name: machine-agent-linux
+    vars:
+      agent_version: 21.9.0.3184 
+
+      sim_enabled: "true"
+      host_name: '{{ ansible_fqdn }}'
+
+      appd_linux_root: "/opt/appdynamics"
+      machine_agent_dest_folder_linux: "{{ appd_linux_root }}/machine-agent"
+
+      java_system_properties: "" 
+
+      appdynamics_user: appdynamics
