@@ -12,7 +12,7 @@ Requirements
 - Obtain controller connection details (host, access key, account name)
 - Have Ansible installed on a Control node
 - Ability to SSH into Target nodes from Control node
-- Download Machine agent .zip to the root of this project
+- Download Machine agent .zip binaries
 
 Role Variables
 --------------
@@ -33,8 +33,18 @@ create_appdynamics_user: # controls if appdynamics user should be created on tar
 appdynamics_user: # user and group name
 ```
 
-Example Running Playbook
+Running Playbook Steps
 ----------------
 
+1. Create a `.local.controller.yaml` file in playbooks/vars
+1.1. Populate with your controller values (host, account, access key)
+
+2. Download latest machine agent files from (AppDynamics download portal)[https://accounts.appdynamics.com/downloads]
+2.1 Place zip file in /role/machine-agent-linux/files directory
+2.2 Think about alternative ways that delivering machine agent binaries can be achieved without this manual step
+
+3. Run a playbook
 `ansible-playbook playbooks/machine_agent_play.yaml`
+
+4. Check if machine agent is reporting to the controller
 
