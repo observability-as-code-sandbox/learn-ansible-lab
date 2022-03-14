@@ -1,0 +1,5 @@
+[linux]
+target1-cloud-machine ansible_host=cludmachineapp-name-xxx.appd-cloudmachine.com ansible_user=centos
+
+[linux:vars]
+ansible_ssh_private_key_file=~/.ssh/generic-vm.pem
