@@ -41,6 +41,7 @@ Running Playbook Steps
 
 1. Create a `.local.controller.yaml` file in playbooks/vars. 
 - Populate with your controller values (host, account, access key)
+- Find out where these values are used
 
 2. Download latest machine agent files from [AppDynamics download portal](https://accounts.appdynamics.com/downloads). 
 - Place zip file in /role/machine-agent-linux/files directory
