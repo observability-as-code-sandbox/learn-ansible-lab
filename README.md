@@ -1,12 +1,12 @@
 # Learn Ansible Lab
 
-Machine Agent Linux Play
+## Machine Agent Linux Play
 =========
 
 Installs AppDynamics machine agent on a Linux target machine. 
 As a result of a successful execution, machine agent run as a service on a machine and reporting to a controller.
 
-Requirements
+### Requirements
 ------------
 
 - Create a Target node (Linux, Centos or RedHat) to be used to install machine agent on
@@ -15,7 +15,7 @@ Requirements
 - Ability to SSH into Target nodes from Control node
 - Download Machine agent .zip binaries
 
-Role Variables
+### Role Variables
 --------------
 Machine-agent-linux role variables explained:
 
@@ -36,7 +36,7 @@ create_appdynamics_user: # controls if appdynamics user should be created on tar
 appdynamics_user: # user and group name
 ```
 
-Running Playbook Steps
+### Running Playbook Steps
 ----------------
 
 1. Create a `.local.controller.yaml` file in playbooks/vars. 
