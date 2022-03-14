@@ -1,0 +1,88 @@
+---
+
+- name: Linux pre-requisites block
+  become: true
+  block:
+  - name: Install necessary packages on a target
+    include_tasks: server_requirements.yml
+
+  # Ensure that appdynamics user exists 
+  - include_tasks: appd_user.yml
+
+- name: Ensure that machine agent directory exists
+  become: true
+  block:
+  - name: Ensures machine agent {{ machine_agent_dest_folder_linux }} dir exists
+    file:
+      path: "{{ machine_agent_dest_folder_linux }}/"
+      state: directory
+      mode: 0755
+      owner: "{{ appdynamics_user }}"
+      group: "{{ appdynamics_user }}"
+
+## Copy agent files to target machine
+- include_tasks: copy_agent.yml
+
+- name: Unzip the Machine agent file
+  become: true
+  unarchive:
+    src:  "{{ machine_agent_dest_folder_linux }}/{{ ma_agent_dest_file }}"
+    dest: "{{ machine_agent_dest_folder_linux }}"
+    owner: "{{ appdynamics_user }}"
+    group: "{{ appdynamics_user }}"
+    mode: 0755
+    remote_src: yes
+  changed_when: false
+
+- name: Configure Machine Agent controller-info.xml file
+  become: true
+  template:
+    src: templates/machine-agent-controller-info.xml.j2
+    dest: '{{ machine_agent_dest_folder_linux }}/conf/controller-info.xml'
+    owner: "{{ appdynamics_user }}"
+    group: "{{ appdynamics_user }}"
+    mode: 0755
+  changed_when: false
+
+- name: Add the Agent as a Service - systemd
+  become: true
+  template:
+    src: templates/appdynamics-machine-agent.service.j2
+    dest: /etc/systemd/system/appdynamics-machine-agent.service
+    force: true
+    owner: root
+    group: root
+    mode: 0644
+  register: machine_agent_systemd_result
+
+- name: Enable the Machine Agent to start at system startup - systemd
+  become: true
+  systemd:
+    name: appdynamics-machine-agent
+    enabled: yes
+    force: true
+    masked: no
+
+# Reload systemd if it is an upgrade or re-installation
+- name:  Reload systemd configs - systemd
+  become: true
+  systemd:
+    daemon_reload: yes
+
+- name: Start the agent service - systemd
+  become: true
+  systemd:
+    name: appdynamics-machine-agent
+    state: restarted
+    daemon_reload: yes
+  changed_when: false
+
+- name: Make sure the service is running - systemd
+  command: systemctl status appdynamics-machine-agent
+  register: result
+  ignore_errors: yes
+  changed_when: false
+
+- name: Show Machine Agent status
+  debug:
+    var: result

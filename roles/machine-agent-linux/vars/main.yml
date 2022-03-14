@@ -1,0 +1,18 @@
+---
+# vars file for machine-agent-linux
+
+agent_version: 21.9.0.3184 
+
+sim_enabled: "true"
+host_name: '{{ ansible_fqdn }}'
+
+appd_linux_root: "/opt/appdynamics"
+machine_agent_dest_folder_linux: "{{ appd_linux_root }}/machine-agent"
+
+ma_agent_dest_file: "machine-agent.zip"
+ma_agent_source_file: "machineagent-bundle-64bit-linux-{{ agent_version }}.zip"
+
+java_system_properties: "" 
+
+create_appdynamics_user: yes
+appdynamics_user: appdynamics

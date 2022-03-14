@@ -1,0 +1,7 @@
+---
+- name: Copy Machine Agent files - from Local
+  become: true
+  ansible.builtin.copy:
+    src: "{{ ma_agent_source_file }}"
+    dest: "{{ machine_agent_dest_folder_linux }}/{{ ma_agent_dest_file }}"
+    mode: 0755

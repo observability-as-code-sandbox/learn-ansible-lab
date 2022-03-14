@@ -1,0 +1,24 @@
+
+- name: Make sure we have a '"{{ appdynamics_user }}"' group
+  group:
+    name: "{{ appdynamics_user }}"
+    state: present
+    local: yes
+
+- name: "Add '{{ appdynamics_user }}' user, that belongs to '{{ appdynamics_user }}' group"
+  user:
+    name: "{{ appdynamics_user }}"
+    group: "{{ appdynamics_user }}"
+    groups: 
+    - "{{ appdynamics_user }}"
+    append: no
+    local: yes
+    state: present
+
+- name: Allow '"{{ appdynamics_user }}"' group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%{{ appdynamics_user }}'
+    line: '%{{ appdynamics_user }} ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
