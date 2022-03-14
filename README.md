@@ -4,7 +4,7 @@
 =========
 
 Installs AppDynamics machine agent on a Linux target machine. 
-As a result of a successful execution, machine agent run as a service on a machine and reporting to a controller.
+As a result of a successful execution, machine agent runs as a service on a machine and reports to a controller.
 
 ### Requirements
 ------------
